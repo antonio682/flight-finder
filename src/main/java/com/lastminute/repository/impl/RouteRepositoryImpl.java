@@ -7,6 +7,7 @@ import com.lastminute.repository.RouteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RouteRepositoryImpl  extends RepositoryBase implements RouteRepository {
 
@@ -35,18 +36,18 @@ public class RouteRepositoryImpl  extends RepositoryBase implements RouteReposit
     }
 
     @Override
-    public RouteDomain findByOrigin(String origin) {
+    public List<RouteDomain> findByOrigin(String origin) {
+
         return findAll().stream()
                 .filter(flight -> flight.getOrigin().equalsIgnoreCase(origin))
-                .findFirst()
-                .orElse(null);
+                .collect(Collectors.toList());
     }
 
     @Override
-    public RouteDomain findByDestination(String destination) {
+    public List<RouteDomain> findByDestination(String destination) {
+
         return findAll().stream()
                 .filter(flight -> flight.getDestination().equalsIgnoreCase(destination))
-                .findFirst()
-                .orElse(null);
+                .collect(Collectors.toList());
     }
 }

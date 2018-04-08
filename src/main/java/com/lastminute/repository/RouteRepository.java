@@ -10,7 +10,7 @@ public interface RouteRepository {
 
     RouteDomain findByCode(String code);
 
-    RouteDomain findByOrigin(String origin);
+    List<RouteDomain> findByOrigin(String origin);
 
-    RouteDomain findByDestination(String destination);
+    List<RouteDomain> findByDestination(String destination);
 }

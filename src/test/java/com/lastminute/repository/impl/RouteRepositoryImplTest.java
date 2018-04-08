@@ -42,14 +42,16 @@ public class RouteRepositoryImplTest {
         RouteDomain responseRoute = routeRepository.findByCode(EXPECTED_ROUTE_CODE);
 
         // THEN
-        checkExpectedResults(EXPECTED_ROUTE_CODE, EXPECTED_ORIGIN, EXPECTED_DESTINATION, responseRoute);
+        assertTrue("Wrong Code", responseRoute.getCode().equalsIgnoreCase(EXPECTED_ROUTE_CODE));
+        assertTrue("Wrong Origin", responseRoute.getOrigin().equalsIgnoreCase(EXPECTED_ORIGIN));
+        assertTrue("Wrong Destination", responseRoute.getDestination().equalsIgnoreCase(EXPECTED_DESTINATION));
     }
 
     @Test
     public void should_return_route_by_origin() {
 
         // WHEN
-        RouteDomain responseRoute = routeRepository.findByOrigin(EXPECTED_ORIGIN);
+        List<RouteDomain> responseRoute = routeRepository.findByOrigin(EXPECTED_ORIGIN);
         // THEN
         checkExpectedResults(EXPECTED_ROUTE_CODE, EXPECTED_ORIGIN, EXPECTED_DESTINATION, responseRoute);
     }
@@ -58,13 +60,19 @@ public class RouteRepositoryImplTest {
     public void should_return_route_by_destination() {
 
         // WHEN
-        RouteDomain responseRoute = routeRepository.findByDestination(EXPECTED_DESTINATION);
+        List<RouteDomain> responseRoute = routeRepository.findByDestination(EXPECTED_DESTINATION);
         // THEN
         checkExpectedResults(EXPECTED_ROUTE_CODE, EXPECTED_ORIGIN, EXPECTED_DESTINATION, responseRoute);
     }
 
     private void checkExpectedResults(String expectedRouteCode, String expectedOrigin, String expectedDestination,
-                                      RouteDomain responseRoute) {
+                                      List<RouteDomain>  responseRoutes) {
+
+        RouteDomain responseRoute = responseRoutes.stream()
+                .findFirst()
+                .orElse( RouteDomain.builder()
+                        .build()
+                );
 
         assertTrue("Wrong Code", responseRoute.getCode().equalsIgnoreCase(expectedRouteCode));
         assertTrue("Wrong Origin", responseRoute.getOrigin().equalsIgnoreCase(expectedOrigin));
