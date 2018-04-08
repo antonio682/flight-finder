@@ -1,4 +1,4 @@
-package com.lastminute;
+package com.lastminute.utils;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

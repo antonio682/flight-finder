@@ -1,7 +1,7 @@
 package com.lastminute.repository.impl;
 
 
-import com.lastminute.CsvFiles;
+import com.lastminute.utils.CsvFiles;
 import com.lastminute.domain.FlightDomain;
 import com.lastminute.repository.FlightRepository;
 import com.lastminute.repository.RepositoryBase;
